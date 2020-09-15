@@ -9,13 +9,12 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(message_params.merge(
-      outbox: User.current.outbox,
-      inbox: User.default_doctor.inbox,
-    ))
-    if @message.save
-      redirect_to @message
+    @create_message = Messages::Create.new.call(message_params)
+
+    if @create_message.success?
+      redirect_to @create_message.message
     else
+      @message = @create_message.message
       render "new"
     end
   end
