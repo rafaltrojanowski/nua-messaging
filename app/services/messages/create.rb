@@ -14,7 +14,9 @@ module Messages
         inbox: User.default_doctor.inbox
       ))
 
-      @message.save
+      unless @message.save
+        @errors = message.errors
+      end
 
       self
     end
