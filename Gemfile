@@ -38,6 +38,12 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  # Run against the latest stable release
+  gem 'rspec-rails', '~> 4.0.1'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 group :development do
