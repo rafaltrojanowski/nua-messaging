@@ -40,6 +40,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # Run against the latest stable release
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'factory_bot_rails'
 end
 
 group :test do
