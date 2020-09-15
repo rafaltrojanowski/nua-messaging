@@ -38,8 +38,8 @@ RSpec.describe Messages::Create, type: :service do
   context 'when original_message_id passed in with params' do
     let(:params) {{ body: 'Lorem ipsum' }}
 
-    let(:new_original_message) { FactoryBot.create(:message, created_at: 1.day.ago) }
-    let(:old_original_message) { FactoryBot.create(:message, created_at: 8.days.ago) }
+    let!(:new_original_message) { FactoryBot.create(:message, created_at: 1.day.ago) }
+    let!(:old_original_message) { FactoryBot.create(:message, created_at: 8.days.ago) }
 
     let(:new_original_message_id) { new_original_message.id }
     let(:old_original_message_id) { old_original_message.id }
