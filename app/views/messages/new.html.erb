@@ -17,6 +17,8 @@
         <%= f.text_area :body, class: "form-control", rows: 3 %>
       </div>
 
+      <%= hidden_field_tag :original_message_id, params[:original_message_id] %>
+
       <div class="form-group mb-0 text-right">
         <%= f.submit 'Send Message', class: 'btn btn-primary' %>
       </div>
