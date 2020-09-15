@@ -8,8 +8,8 @@ module Messages
       @errors = []
     end
     
-    def call(message_attrs)
-      @message = Message.new(message_attrs.merge(
+    def call(attrs:, original_message_id: nil)
+      @message = Message.new(attrs.merge(
         outbox: User.current.outbox,
         inbox: User.default_doctor.inbox
       ))

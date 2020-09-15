@@ -9,7 +9,11 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @create_message = Messages::Create.new.call(message_params)
+    original_message_id = params[:original_message_id]
+    @create_message = Messages::Create.new.call(
+      attrs: message_params, 
+      original_message_id: original_message_id
+    )
 
     if @create_message.success?
       redirect_to @create_message.message
