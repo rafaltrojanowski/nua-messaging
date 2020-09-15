@@ -57,8 +57,12 @@ RSpec.describe Messages::Create, type: :service do
         original_message_id: new_original_message_id
       )}
 
-      it 'it should be routed to doctor' do
+      it 'it should be routed to doctor`s inbox' do
         expect(service_call.message.inbox.user).to eq(doctor)
+      end
+
+      it 'has landed in proper user outbox' do
+        expect(service_call.message.outbox.user).to eq(patient)
       end
     end
 
@@ -68,8 +72,12 @@ RSpec.describe Messages::Create, type: :service do
         original_message_id: old_original_message_id
       )}
 
-      it 'it should be routed to admin' do
+      it 'it should be routed to admin`s inbox' do
         expect(service_call.message.inbox.user).to eq(admin)
+      end
+
+      it 'has landed in proper user outbox' do
+        expect(service_call.message.outbox.user).to eq(patient)
       end
     end
   end
