@@ -8,9 +8,9 @@ RSpec.describe PrescriptionsController do
     let!(:admin_inbox) { FactoryBot.create(:inbox, user: admin) }
     let!(:message) { FactoryBot.create(:message) }
 
-    context 'when success' do
-      before { request.env['HTTP_REFERER'] = message_path(message) }
+    before { request.env['HTTP_REFERER'] = message_path(message) }
 
+    context 'when success' do
       it "calls API" do
         expect_any_instance_of(PaymentProviderFactory::Provider)
           .to receive(:debit_card)
@@ -31,12 +31,15 @@ RSpec.describe PrescriptionsController do
     end
 
     context 'when failure' do
-      it 'works' do
+      it 'handles exception gracefully' do
         allow_any_instance_of(PaymentProviderFactory::Provider)
           .to receive(:debit_card)
           .with(patient).and_raise(RuntimeError)
 
         post :create
+
+        expect(subject).to redirect_to(message_path(message))
+        expect(flash[:alert]).to be_present
       end
     end
   end
