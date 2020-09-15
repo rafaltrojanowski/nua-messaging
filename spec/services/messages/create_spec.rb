@@ -21,6 +21,10 @@ RSpec.describe Messages::Create, type: :service do
         expect(service_call.message.persisted?).to be_truthy
         expect(service_call.errors).to be_empty
       end
+
+      it 'message has an unread status after creation' do
+        expect(service_call.message.read).to be_falsey
+      end
     end
 
     context 'when object is not valid' do
