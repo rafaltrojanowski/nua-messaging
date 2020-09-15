@@ -5,6 +5,14 @@
 
   <div class="card-body">
     <%= form_for @message do |f| %>
+      <% if @message.errors.any? %>
+        <ul>
+        <% @message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      <% end %>
+
       <div class="form-group py-3">
         <%= f.text_area :body, class: "form-control", rows: 3 %>
       </div>
